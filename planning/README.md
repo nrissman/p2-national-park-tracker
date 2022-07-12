@@ -76,12 +76,12 @@ parks- api online
                 ref
 
 /////////////////IMAGES///////////////////////
-[Read me Images](thumbnails.jpeg)
-[Read me Images](index.jpeg)
-[Read me Images](guest-show.jpeg)
-[Read me Images](user-index.jpeg)
-[Read me Images](user-show.jpeg)
-[Read me Images](erd.jpeg)
+![Read me Images](thumbnails.jpeg)
+![Read me Images](index.jpeg)
+![Read me Images](guest-show.jpeg)
+![Read me Images](user-index.jpeg)
+![Read me Images](user-show.jpeg)
+![Read me Images](erd.jpeg)
 
 
 
