@@ -1,5 +1,5 @@
 # p2-national-park-tracker
-///////////////USER STORY/////////////////////
+///////////////SUMMARY/////////////////////
 A tracker for national parks you've visited
 
 Welcome to the National Tracker, this web site allow you to view all of the National Parks around America. You can view the Parks as a guest user and simply click on one of the park links to get information on that park (name, location, entrance fees and a brief description). 
@@ -10,24 +10,24 @@ When in your own Parks Tracker you will be able to add/edit information such as 
 
 
 
-/////////////////ROUTES//////////////////////////
- - sign up/sign in
-INDEX-   parks/ get display list of user parks index            GET
-NEW-    /parks/new show for make new park                       GET
-CREATE-  comments- parks/comments comments from park user       POST
-SHOW-   /parks/:id/ shows users individual park                 GET
-SHOW-   /:id shows individual park from guest index             GET
-EDIT-   /parks/:id/edit show edit form for one user park        GET
-UPDATE- /parks:id update a particualpark the redirect           PUT
-INDEX-  /  display list of all national parks                   GET
-DESTROY- delete user park /parks/:id                            DELETE
+## API End Points:
+
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| POST   | `/signup`              | `users#signup`    |
+| POST   | `/login`               | `users#login`     |
+| GET    | `/logout               | `user#logout      |
+| DELETE | `/parks/id:`           | `users#delete`    |
+| GET    | `/:id/edit`            | `user#edit`       |
+| PUT    | `/:id                  | `user#update`     |
+| GET    | `/new`                 | `user#newform`    |
+| GET    | `/`                    | `#index`          |
+| GET    | `/mine`                | `user#index`      |
+| GET    | `/:id`                 | `user#park`       |
 
 
 
-
-
-////////////AS A USER//////////////////////user stories (`As a user ...`)
-(CRUD ACTIONS BELOW)
+## AS A USER (USER STORY):
 -view all parks
     -return all parks upon page load
     -commit when this works
@@ -59,7 +59,7 @@ DESTROY- delete user park /parks/:id                            DELETE
     -return proof of success of somehow 
     -commit when this works
 -be able to add times visited to a park 
-    -default value of some kind (start a zero... like zero likes )
+    -default value of some kind (start a zero...)
     -query for a single park -by ID?
     -update liked field 
     -return that updated document 
@@ -67,7 +67,8 @@ DESTROY- delete user park /parks/:id                            DELETE
 -be able to add comments to single parks
     -search for single park 
 
-    Schema: (model)
+## MODELS:
+    Schema: 
         -park
             -city - string
             -state - string
@@ -82,17 +83,32 @@ DESTROY- delete user park /parks/:id                            DELETE
             autor:
                 type
                 ref
+        - ![Read me Images](img/erd.jpeg)
 
-/////////////////IMAGES///////////////////////
+
+## WIRE FRAMES:
 ![Read me Images](img/thumbnails.jpeg)
 ![Read me Images](img/index.jpeg)
 ![Read me Images](img/guest-show.jpeg)
 ![Read me Images](img/user-index.jpeg)
 ![Read me Images](img/user-show.jpeg)
-![Read me Images](img/erd.jpeg)
 
 
 
 
-////////////////////API///////////////////////////
+
+## API:
 https://developer.nps.gov/api/v1/parks?api_key=T8iDnVWy0Rzjz6N4p6AK7d5BmPgvqMWNNfOlfjRZ
+
+
+## TECHNOLOGIES USED:
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "liquid": "^5.1.1",
+    "liquid-express-views": "^1.0.8",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.4.4",
+    "morgan": "^1.10.0"
