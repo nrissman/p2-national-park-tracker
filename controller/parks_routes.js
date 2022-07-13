@@ -78,6 +78,7 @@ router.post('/', (req, res) => {
 // GET - Index
 // localhost:3000/parks
 router.get('/', (req, res) => {
+    console.log('here i am')
     // mongoose to find all parks
     Park.find({})
     // return parks as json
