@@ -1,0 +1,45 @@
+{% layout 'layout.liquid' %}
+
+{% block content %}
+<div class="container-md">
+    <form action="/parks/{{park._id}}?_method=PUT" method="POST">
+        <fieldset>
+            <legend>Edit This {{park.name}}</legend>
+            <label class="label-form">Name:</label>
+            <input 
+                type="text" 
+                name="name" 
+                placeholder="enter name" 
+                class="form-control"
+                value="{{park.name}}"
+            >
+            <label class="label-form">Color:</label>
+                <input 
+                type="text" 
+                name="color" 
+                placeholder="enter color" 
+                class="form-control"
+                value="{{park.color}}"
+            >
+            <label class="label-form">Ready To Eat?</label>
+        <input 
+            type="checkbox" 
+            name="readyToEat" 
+            class="for-check-input"
+            {% if park.readyToEat %} 
+                checked 
+            {% endif %}
+        >
+        </fieldset>
+        <div class="btn-group">
+        <input 
+            type="submit" 
+            value="Edit 
+            {{park.name}}" 
+            class="btn btn-success"   
+        >
+        <a href="/parks" class="btn btn-warning">Nevermind</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
