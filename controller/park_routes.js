@@ -3,27 +3,27 @@ const express = require('express')
 const router = express.Router()
 // // importing Park model to access database
 // const Park = require('../models/park')
-const fetch = require('node-fetch')
+// const fetch = require('node-fetch')
+require('dotenv').config()
+// const Park =require(".controller")
+const axios = require('axios')
 
 
 
 
 
-router.get('/', async (req, res) => {
-    const apiUrl = `https://developer.nps.gov/api/v1/parks?api_key=T8iDnVWy0Rzjz6N4p6AK7d5BmPgvqMWNNfOlfjRZ`
-    await fetch(apiUrl)
-    .then(res => res.json() )
 
-    .then(parks => {
-        const apiData = parks
-        console.log(parks)
-        // console.log('api data', apiData )
-        // res.render('parks/index', {data})
+router.get('/', (req, res) => {
+    const api_key = process.env.API_KEY
+    axios.get(`https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${api_key}`)
+
+    .then(apiResponse => {
+        const parks = apiResponse.data
+        console.log(apiResponse.data)
+        res.render('parks/index', { parks })
     })
-    .catch(err=>{
-        console.error('Error:', err)
-        res.json(err)
-    })
+    
+    
     
 })
 
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 //     // return parks as json
 //         .then(parks => {
 //             // res.json(park)
-//             res.render('parks/index', { parks })
+//             
 //         })
 //         .catch(err => {
 //             res.json(err)

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/nrissman/p2-national-park-tracker#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.1",
