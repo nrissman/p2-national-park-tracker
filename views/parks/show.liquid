@@ -3,9 +3,12 @@
 {% block content%}
 <div>
     
-    <p>Park Name:{{park.fullName}}</p>
-    <p>Park City: {{park.color}}</p>
-    <p>Park State:</p>
+    <h4>Park Name: {{park.fullName}}</h4>
+    <p>Park City: {{park.addresses[0].city}}</p>
+    <p>Park State: {{park.states}}</p>
+    <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
+    <p>Description: {{park.description}}</p>
+
     
 </div>
 {% endblock %}
