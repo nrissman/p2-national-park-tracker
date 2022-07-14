@@ -1,29 +1,19 @@
-{% layout 'layout.liquid' %}
-
-{% block content %}
-<div>
-    <h2 class="display-6">All Parks</h2>
-    <div class="row">
-
-        {% for park in parks %}
-            <div class="card" style="width: 18rem">
-                <h5 class="card-header">{{park.name}}</h5>
-                <div class="card-body">
-                    <h6 class="card-title">
-                        {% if park.readyToEat %}
-                            Ripe
+<!-- {% layout 'layout.liquid' %}
+    {% block content %}
+        <div class="container-md">
+            <article>
+                <h2>Location: {{data.name}}</h2>
+                <h4>Weather Description: {{data.weather[0].description}}</h4>
+                {% if data.main.temp > '89' %}
+                <h4 style="color: red"> Temperature: {{data.main.temp}}<h4>
+                    {% elsif data.main.temp < '40' %}
+                    <h4 style="color: blue">Temperature: {{data.main.temp}}<h4>
                         {% else %}
-                            Not Ripe
-                        {% endif %}
-                    </h6>
-                    <p class="card-text">
-                        The color of this {{park.name}} is {{park.color}}
-                    </p>
-                    
-                    <a href="/parks/{{park._id}}" class="btn btn-info">View {{park.name}}</a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
+                        <h4>Temperature: {{data.main.temp}}<h4>
+                {% endif %}
+                <h4>Today's High: {{data.main.temp_max}}</h4>
+                <h4>Today's Low: {{data.main.temp_min}}</h4>
+                <button><a href="/weather">Change Location</a></button>
+            </article>
+        </div>
+    {% endblock %} -->
