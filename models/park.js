@@ -16,7 +16,7 @@ const parkSchema = new Schema(
 			type: Schema.Types.ObjectId, // a single User ._id
 			ref: 'User', // const User = model('User', userSchema) the string of 'User' is how we reference a model
 		},
-		comments: [commentSchema] // a fruit can have many comments. Comments are a sub doc of Fruit
+		comments: [commentSchema] // a park can have many comments. Comments are a sub doc of parks
 	},
 	{
 		timestamps: true, //does not go in object
@@ -24,7 +24,7 @@ const parkSchema = new Schema(
 )
 
 // need to make a model with the above schema
-// this collections will be called fruits
+// this collections will be called parks
 const Park = model('park', parkSchema)
 
 module.exports = Park
