@@ -1,10 +1,14 @@
 {% layout 'layout.liquid' %}
 
 {% block content%}
-
 <div>
-    {% for park in park %}
-    <h4 style=" color: yellow">Park Name: {{park.fullName}}</h4>
-    {% endfor %}
+    <h2 class="display-2" style=color:yellow;>View Parks</h2>
+    <h6 style="color: yellow;">Click On Any Park</h6>
+    <div class="row">
+        {% for park in park %}
+            <a href="/parks/{{parks.guestShow}}" style="width: 25rem; color:yellow;"  >{{park.fullName}}</a>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
