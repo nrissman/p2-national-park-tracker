@@ -19,7 +19,7 @@ router.get('/:parkCode', (req, res) => {
         .then(apiRes => {
             const park = apiRes.data.data[0]
             console.log('this is the response from the api', park.fullName)
-            res.render('parks/show', { park })
+            res.render('Parks/guestShow', { park })
         })
 
         .catch(err=>{
@@ -31,6 +31,25 @@ router.get('/:parkCode', (req, res) => {
 })
 
 
+
+//////////////////////INDEX ROUTE////////////////////////
+router.get('/', (req, res) => { 
+    //test using park code acad
+    //url for testing should be /parks/acad
+    axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
+        .then(apiRes => {
+            const park = apiRes.data.data
+            console.log('this is the park index', park)
+            res.render('parks/index', { park })
+        })
+
+        .catch(err=>{
+            console.error('Error:', err)
+            res.json(err)
+        })
+    
+    
+})
 
 
 

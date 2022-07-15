@@ -25,6 +25,6 @@ const parkSchema = new Schema(
 
 // need to make a model with the above schema
 // this collections will be called fruits
-const Fruit = model('Fruit', fruitSchema)
+const Park = model('park', parkSchema)
 
-module.exports = Fruit
+module.exports = Park

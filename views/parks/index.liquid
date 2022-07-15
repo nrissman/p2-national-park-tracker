@@ -1,11 +1,10 @@
 {% layout 'layout.liquid' %}
 
 {% block content%}
+
 <div>
-    
-    <p>Park Name:{{park.fullName}}</p>
-    <p>Park City: {{park.city}}</p>
-    <p>Park State:</p>
-    
+    {% for park in park %}
+    <h4 style=" color: yellow">Park Name: {{park.fullName}}</h4>
+    {% endfor %}
 </div>
 {% endblock %}
