@@ -19,7 +19,7 @@ router.get('/:parkCode', (req, res) => {
         .then(apiRes => {
             const park = apiRes.data.data[0]
             console.log('this is the response from the api', park.fullName)
-            res.render('Parks/guestShow', { park })
+            res.render('parks/guestShow', { park })
         })
 
         .catch(err=>{
@@ -51,21 +51,19 @@ router.get('/', (req, res) => {
     
 })
 
+router.get('/mine', (req, res) => {
+    // find the fruits associated with the logged in user
+    Park.find({ owner: req.session.userId })
+        .then(parks => {
+            res.render('parks/index', { parks })
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ error })
+        })
+})
 
 
-// router.get('/', (req, res) => {
-//     console.log('here i am')
-//     // mongoose to find all parks
-//     Park.find({})
-//     // return parks as json
-//         .then(parks => {
-//             // res.json(park)
-//             
-//         })
-//         .catch(err => {
-//             res.json(err)
-//         })
-// })
 
 
 

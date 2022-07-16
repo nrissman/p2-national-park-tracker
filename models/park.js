@@ -10,7 +10,7 @@ const parkSchema = new Schema(
 		fullName: String,
 		city: String,
 		stateCode: String,
-		entranceFees: Boolean,
+		entranceFees: Number,
 		description: String,
 		owner: {
 			type: Schema.Types.ObjectId, // a single User ._id

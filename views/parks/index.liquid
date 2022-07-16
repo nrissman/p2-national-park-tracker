@@ -6,7 +6,7 @@
     <h6 style="color: yellow;">Click On Any Park</h6>
     <div class="row">
         {% for park in park %}
-            <a href="/parks/{{parks.guestShow}}" style="width: 25rem; color:yellow;"  >{{park.fullName}}</a>
+            <a href="/parks/{{park.parkCode}}" style="width: 25rem; color:yellow;">{{park.fullName}}</a>
         {% endfor %}
     </div>
 
