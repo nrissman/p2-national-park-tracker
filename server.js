@@ -7,7 +7,6 @@ const express = require('express')
 const morgan = require('morgan')
 const methodOverride = require('method-override')
 const parkRoutes = require('./controller/park_routes')
-const fetch = require('node-fetch')
 const userRoutes = require('./controller/user_routes')
 const commentRoutes = require('./controller/comment_routes')
 

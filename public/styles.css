@@ -7,10 +7,17 @@ body{
 }
 
 a{
+
     margin: 5px;
 }
 
 h2{
+    text-align: center;
     font-style: italic;
 
+}
+
+h4{
+    text-align: center;
+    font-style: italic;
 }

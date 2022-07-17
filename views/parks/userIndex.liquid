@@ -1,0 +1,32 @@
+<!-- {% layout 'layout.liquid' %}
+
+{% block content %}
+<div>
+    <h2 class="display-6">My Parks</h2>
+    <a href="/parks/new" class="nav-link">Add New Park</a>
+    
+</div>
+{% endblock %} -->
+
+{% layout 'layout.liquid' %}
+
+{% block content %}
+<div>
+    <h2 class="display-6">All Fruits</h2>
+    <div class="row">
+
+        {% for fruit in fruits %}
+            <div class="card" style="width: 18rem">
+                <h5 class="card-header">{{fruit.name}}</h5>
+                <div class="card-body">
+                    <p class="card-text">
+                        The color of this {{fruit.name}} is {{fruit.color}}
+                    </p>
+                    
+                    <a href="/fruits/{{fruit._id}}" class="btn btn-info">View {{fruit.name}}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

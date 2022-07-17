@@ -2,8 +2,8 @@
 
 {% block content%}
 <div>
-    <h2 class="display-2" style=color:yellow;>View Parks</h2>
-    <h6 style="color: yellow;">Click On Any Park</h6>
+    <h2 class="display-4" style=color:yellow;>Welcome To My Parks Tracker</h2>
+    <h4 style="color: yellow;">To view parks click on any park</h4>
     <div class="row">
         {% for park in park %}
             <a href="/parks/{{park.parkCode}}" style="width: 25rem; color:yellow;">{{park.fullName}}</a>

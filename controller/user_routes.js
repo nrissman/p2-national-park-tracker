@@ -21,7 +21,7 @@ router.get('/signup', (req, res) => {
 })
 // one POST to make the db request
 router.post('/signup', async (req, res) => {
-    console.log('this is our initial request body', req.body)
+    console.log('this is our initial request body')
     // first, we need to encrypt our password
     // that's why we made this an async function
     // because the password hashing takes a little time, we want to wait until it's done before things progress
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
                     req.session.userId = user._id
                     // redirect to the '/parks' page
                     console.log('this is the session after login', req.session)
-                    res.redirect('/parks')
+                    res.redirect('/parks/mine')
                 } else {
                     // otherwise(pw incorrect) send an error message
                     // for now just send some json error
