@@ -1,32 +1,22 @@
-<!-- {% layout 'layout.liquid' %}
 
-{% block content %}
-<div>
-    <h2 class="display-6">My Parks</h2>
-    <a href="/parks/new" class="nav-link">Add New Park</a>
-    
-</div>
-{% endblock %} -->
 
 {% layout 'layout.liquid' %}
 
 {% block content %}
 <div>
-    <h2 class="display-6">All Fruits</h2>
+    <h2 class="display-6" style="color:yellow;">All Parks</h2>
+    <a href="/parks/new" class="nav-link" style="color:yellow;">Add New Park</a>
     <div class="row">
 
-        {% for fruit in fruits %}
-            <div class="card" style="width: 18rem">
-                <h5 class="card-header">{{fruit.name}}</h5>
-                <div class="card-body">
-                    <p class="card-text">
-                        The color of this {{fruit.name}} is {{fruit.color}}
-                    </p>
+            <div class="card" style="width: 22rem">
+                <h5 class="card-header">{{park.name}}</h5>
+                <div class="card-body" style="background-color:rgb(29, 93, 63);">
+                    <a href="/mine"  style="width: 25rem; color:yellow;">View Park</a>  
                     
-                    <a href="/fruits/{{fruit._id}}" class="btn btn-info">View {{fruit.name}}</a>
+            
                 </div>
             </div>
-        {% endfor %}
+    
     </div>
 </div>
 {% endblock %}

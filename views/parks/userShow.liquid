@@ -1,0 +1,14 @@
+{% layout 'layout.liquid' %}
+
+{% block content%}
+<div style="color: yellow">
+    {% if park > 0 %}
+    <h4>Park Name: {{park.fullName}}</h4>
+    <p>Park City: {{park.addresses[0].city}}</p>
+    <p>Park State: {{park.states}}</p>
+    <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
+    <p>Description: {{park.description}}</p>
+    {% endif%}
+    
+</div>
+{% endblock %}

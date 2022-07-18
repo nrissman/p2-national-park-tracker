@@ -1,43 +1,56 @@
 {%layout 'layout.liquid' %}
 // i need to make this only post on users page
 {% block content %}
-<form action="/mine" method="POST">
+<div class="container-mn" style="color: yellow;">
+<form action="/parks/create" method="POST">
+    <fieldset>
+        <legend style="color: yellow;">Add A Park</legend>
+        <label class="form-lable">Name:</label>
+            <input 
+                class="form-control"
+                type="text" 
+                fullName="fullName" 
+                placeholder="Enter Name"
+            >
+        <label class="form-lable">Enter City:</label>
+            <input 
+                class="form-control"
+                type="text" 
+                name="city" 
+                placeholder="Enter City"
+            >
+        <label class="form-lable">Statecode:</label>
+            <input 
+                class="form-control"
+                type="text" 
+                name="stateCode" 
+                placeholder="Enter State Code"
+            >
+        <label class="form-lable">Entrance Fees:</label>
+            <input 
+                class="form-control"
+                type="number" 
+                name="entranceFees" 
+                placeholder="Entrance Fee"
+            >
+        <label class="form-lable">Description:</label> 
+            <input
+                class="form-control"
+                type="text" 
+                name="description" 
+                placeholder="Enter Description"
+            >
 
-    <input 
-    type="text" 
-    fullName="fullName" 
-    placeholder="enter name"
-    >
-
-    <input 
-    type="text" 
-    name="city" 
-    placeholder="enter city"
-    >
-
-    <input 
-    type="text" 
-    name="stateCode" 
-    placeholder="enter state code">
-
-    <input 
-    type="number" 
-    name="entranceFees" 
-    placeholder="enter fee"
-    >
-    
-    <input
-    type="text" 
-    name="description" 
-    placeholder="enter description"
-    >
-
-    <input 
-    type="submit" 
-    value="Create New Park"
-    >
-
+            <input 
+                type="submit" 
+                value="Create New Park"
+                class="btn btn-success"
+            >
+    </fieldset>
 </form>
+</div>
+
+
 {% endblock %}
 
 

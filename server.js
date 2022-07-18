@@ -46,7 +46,7 @@ app.use(
 ////////////////////////////////////////////
 app.use('/parks', parkRoutes)
 app.use('/users', userRoutes)
-// app.use('/comments', commentRoutes)
+app.use('/comments', commentRoutes)
 
 // localhost:3000/
 app.get('/', (req, res) => {

@@ -8,7 +8,39 @@
     <p>Park State: {{park.states}}</p>
     <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
     <p>Description: {{park.description}}</p>
+    <form action="/parks/create" method="POST">
+        <fieldset>
+            <input 
+                class="form-control"
+                type="text" 
+                name="fullName" 
+                value="{{park.fullName}}"
+                hidden                    
+            >
+        
+            <input 
+                class="form-control"
+                type="text" 
+                name="parkCode" 
+                value={{park.parkCode}} 
+                hidden
+            >
+        
+            <input 
+                type="submit" 
+                value="Add To My Parks"
+                class="btn btn-success"
+            >
+        </fieldset>
+    </form>
 
     
 </div>
 {% endblock %}
+
+
+<!-- //add a button "add to my parks" that will add this park you YOUR parks thrn bring you to userShow page (my parks) -->
+
+<!-- //park code  -->
+<!-- full name  -->
+<!-- statecode -->
