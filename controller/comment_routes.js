@@ -3,7 +3,7 @@ const express = require('express')
 // making a router
 const router = express.Router()
 // importing Park model to access database
-// const Park = require('../models/park')
+const MyPark = require('../models/park')
 
 // POST - Creation
 // localhost:3000/comments/:parkId <- A single Park can have many comments
@@ -11,7 +11,7 @@ router.post('/:parkId', (req, res) => {
     const parkId = req.params.parkId
     req.body.author = req.body.userId
 
-    Park.findById(parkId)
+    MyPark.findById(parkId)
         // after we found a park 
         // take that park and add the comment
         .then(park => {
@@ -35,7 +35,7 @@ router.delete('/delete/:parkId/:commId', (req, res) => {
     const commId = req.params.commId
 
     //find a park by its ID... then find this comment by its ID... remove the comment
-    Park.findById(parkId)
+    MyPark.findById(parkId)
     //because one park can have many comments we need to use commId
     .then(park => {
         const comment = park.comments.id(commId)

@@ -8,6 +8,25 @@ const api_key = process.env.API_KEY
 const MyPark = require('../models/mypark')
 
 
+
+/////////////////////DELETE/////////////////////////////////////////////
+router.delete('/mine', (req, res) => {
+    const parkId = req.params.parkCode
+
+    MyPark.findByIdAndRemove(parkId)
+        .then(Mypark => {
+            console.log('////////////////////success/////////////')
+            
+            res.redirect('/parks/mine')
+        })
+        .catch(err => {
+            console.log('//////////////////error////////////////')
+            res.json(err)
+        })
+})
+
+
+
 /////////////////////INDEX ROUTE////////////////////////
 //this will show any user that visits the site a list of all national parks 
 router.get('/', (req, res) => { 
@@ -15,18 +34,18 @@ router.get('/', (req, res) => {
     //url for testing should be /parks/acad
     //axios works similar to fetch but does not rquire a .then to turn data into json
     axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
-    .then(apiRes => {
-        //declaring park so i do not have to 'drill' as deep 
-        const park = apiRes.data.data
-        //console.log('this is the park index', park)
-        //rendering(showing all the parks from API)
-        res.render('parks/index', { park })
-    })
-    
-    .catch(err=>{
-        console.error('Error:', err)
-        res.json(err)
-    })
+        .then(apiRes => {
+            //declaring park so i do not have to 'drill' as deep 
+            const park = apiRes.data.data
+            //console.log('this is the park index', park)
+            //rendering(showing all the parks from API)
+            res.render('parks/index', { park })
+        })
+        
+        .catch(err=>{
+            console.error('Error:', err)
+            res.json(err)
+        })
     
     
 })
@@ -35,14 +54,15 @@ router.get('/', (req, res) => {
 //still need to pake this si its not pupulated right away but rather only populates witht the parks you input 
 
 router.get('/mine', (req, res) => { 
-    //axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
-    Park.find({ owner: req.session.userId })
+    axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
+    MyPark.find({ owner: req.session.userId })
         .then(apiRes => {
             //declaring park so i do not have to 'drill' as deep 
-            const park = apiRes.data.data
-            //console.log('this is the park index', park)
+            const park = apiRes
+            // console.log(apiRes)
+            console.log('this is the park index')
             //rendering(showing all the parks from API)
-            res.render('parks/index', { park: park.fullName })
+            res.render('parks/', { park })
         })
         
         .catch(err=>{
@@ -68,9 +88,9 @@ router.post('/create', (req, res) => {
     req.body.owner = req.session.userId
     MyPark.create(req.body)
         .then(MyPark => {
-            console.log('/////HELLO IM CONSOLING/////')
-            console.log(myPark)
-            console.log('/////HELLO IM CONSOLING/////')
+            //console.log('/////HELLO IM CONSOLING/////')
+            // console.log(myPark)
+            //console.log('/////HELLO IM CONSOLING/////')
             // res.json(park)
             res.redirect('/parks/mine')
         })
@@ -98,8 +118,10 @@ router.get('/:parkCode', (req, res) => {
         .then(apiRes => {
             const park = apiRes.data.data[0]
             console.log('HELLO NEIL AND TI+MOOOOOOOOOOOOOOO')
-            console.log('this is the response from the api', park)
+            // console.log('this is the response from the api', park)
             console.log('/////////////////////////////////////////')
+            //Comment.find({parkCode: pc })
+            //.then() youre going to pass the comments and park data to the parks/show page for all to see 
             res.render('parks/show', { park })
         })
 

@@ -7,6 +7,7 @@
     <p>Park City: {{park.addresses[0].city}}</p>
     <p>Park State: {{park.states}}</p>
     <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
+    <img src={{park.images.}}>
     <p>Description: {{park.description}}</p>
     <form action="/parks/create" method="POST">
         <fieldset>
@@ -33,8 +34,33 @@
             >
         </fieldset>
     </form>
+    <div class="btn-group">
 
-    
+        <a href="/parks/{{park}}/edit" class="btn btn-primary">Edit Park</a>
+        <form action="/parks/{{park.parkCode}}?_method=DELETE" method="POST">
+            <input type="submit" value="Remove Park" class="btn btn-danger">
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form action="/comments/{{park.parkCode}}" method="POST">
+            <fieldset>
+                <legend>Add comment</legend>
+                <label class="form-label">Comment: </label>
+                <input type="text" class="form-control" name="note" placeholder="Enter comment here"/>
+            </fieldset>
+            <input type="submit" class="btn btn-success" value="Add comment" />
+        </form>
+    </div>
+    {% if park.comments.length > 0 %}
+    <div class="container-sm justify-content-center">
+        <div class="col-md-8 col-lg-6" >
+            {% for comment in park.comments %}
+            {% render '../comment.liquid' comment: comment, userId: userId, park: park, username: username%}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
 
