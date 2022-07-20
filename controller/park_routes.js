@@ -5,7 +5,7 @@ const router = express.Router()
 require('dotenv').config()
 const axios = require('axios')
 const api_key = process.env.API_KEY
-const MyPark = require('../models/mypark')
+const MyPark = require('../models/myPark')
 // const Comment = require('../models/comment')
 
 
