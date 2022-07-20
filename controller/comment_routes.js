@@ -45,7 +45,7 @@ router.delete('/delete/:parkId/:commId', (req, res) => {
         return park.save()
     })
     .then(park => {
-        res.redirect(`/parks/${parkId}`)
+        res.redirect(`/parks/`)
     })
     .catch(err => {
         res.send(err)

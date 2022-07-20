@@ -6,13 +6,14 @@ require('dotenv').config()
 const axios = require('axios')
 const api_key = process.env.API_KEY
 const MyPark = require('../models/mypark')
+const Comment = require('../models/comment')
 
 
 
 /////////////////////DELETE/////////////////////////////////////////////
-router.delete('/mine', (req, res) => {
-    const parkId = req.params.parkCode
-
+router.delete('/:id', (req, res) => {
+    const parkId = req.params.id
+    console.log(parkId)
     MyPark.findByIdAndRemove(parkId)
         .then(Mypark => {
             console.log('////////////////////success/////////////')
@@ -20,10 +21,11 @@ router.delete('/mine', (req, res) => {
             res.redirect('/parks/mine')
         })
         .catch(err => {
-            console.log('//////////////////error////////////////')
+            console.log('//////////////////error////////////////',)
             res.json(err)
         })
 })
+
 
 
 
@@ -60,7 +62,7 @@ router.get('/mine', (req, res) => {
             //declaring park so i do not have to 'drill' as deep 
             const park = apiRes
             // console.log(apiRes)
-            console.log('this is the park index')
+            //console.log('this is the park index')
             //rendering(showing all the parks from API)
             res.render('parks/', { park })
         })
@@ -117,11 +119,13 @@ router.get('/:parkCode', (req, res) => {
     axios.get(`https://developer.nps.gov/api/v1/parks?parkCode=${pc}&api_key=${api_key}`)
         .then(apiRes => {
             const park = apiRes.data.data[0]
-            console.log('HELLO NEIL AND TI+MOOOOOOOOOOOOOOO')
+            //console.log('HELLO NEIL AND TI+MOOOOOOOOOOOOOOO')
             // console.log('this is the response from the api', park)
-            console.log('/////////////////////////////////////////')
-            //Comment.find({parkCode: pc })
-            //.then() youre going to pass the comments and park data to the parks/show page for all to see 
+            //console.log('/////////////////////////////////////////')
+
+            // Comment.find({parkCode: pc })
+            // .then()
+            // youre going to pass the comments and park data to the parks/show page for all to see 
             res.render('parks/show', { park })
         })
 
