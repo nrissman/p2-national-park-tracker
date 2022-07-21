@@ -25,21 +25,6 @@ router.delete('/:id', (req, res) => {
             res.json(err)
         })
 })
-// router.delete('/:parkCode', (req, res) => {
-//     const pc = req.params.parkCode
-//     console.log(pc)
-//     MyPark.findOneAndDelete(pc)
-//         .then(Mypark => {
-//             console.log('////////////////////success/////////////', parkCode )
-            
-//             res.render('/parks/mine')
-//         })
-//         .catch(err => {
-            
-//             console.log('//////////////////error////////////////',)
-//             res.json(err)
-//         })
-// })
 
 // GET route for displaying an update form
 router.get('/:id/edit', (req, res) => {
@@ -146,7 +131,7 @@ router.post('/create', (req, res) => {
 
 
 
-// https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=Ch49ZnTyP3tLu90rW3KIqroRFQKmLQV97B1YtR7a
+
 
 
 
