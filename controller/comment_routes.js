@@ -4,8 +4,11 @@ const express = require('express')
 const router = express.Router()
 // importing Park model to access database
 const MyPark = require('../models/park')
+const Comment = require('../models/comment')
 
 // POST - Creation
+// create route has to say Comment.create 
+//redirect to park show page with parkid 
 // localhost:3000/comments/:parkId <- A single Park can have many comments
 router.post('/:parkId', (req, res) => {
     const parkId = req.params.parkId

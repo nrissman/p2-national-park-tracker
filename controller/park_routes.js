@@ -153,6 +153,8 @@ router.get('/:parkCode', (req, res) => {
             // Comment.find({parkCode: pc })
             // .then()
             // youre going to pass the comments and park data to the parks/show page for all to see 
+            //need to query comments and filter by parkid then all parks will show with any associated comments 
+    
             res.render('parks/show', { park })
         })
 
