@@ -10,7 +10,7 @@ const MyPark = require('../models/myPark')
 
 
 
-/////////////////////DELETE/////////////////////////////////////////////
+///////////////////DELETE/////////////////////////////////////////////
 router.delete('/:id', (req, res) => {
     const parkId = req.params.id
     console.log(parkId)
@@ -25,6 +25,21 @@ router.delete('/:id', (req, res) => {
             res.json(err)
         })
 })
+// router.delete('/:parkCode', (req, res) => {
+//     const pc = req.params.parkCode
+//     console.log(pc)
+//     MyPark.findOneAndDelete(pc)
+//         .then(Mypark => {
+//             console.log('////////////////////success/////////////', parkCode )
+            
+//             res.render('/parks/mine')
+//         })
+//         .catch(err => {
+            
+//             console.log('//////////////////error////////////////',)
+//             res.json(err)
+//         })
+// })
 
 // GET route for displaying an update form
 router.get('/:id/edit', (req, res) => {
@@ -83,7 +98,7 @@ router.get('/', (req, res) => {
 //still need to pake this si its not pupulated right away but rather only populates witht the parks you input 
 
 router.get('/mine', (req, res) => { 
-    axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
+    // axios.get(`https://developer.nps.gov/api/v1/parks?api_key=${api_key}`)
     MyPark.find({ owner: req.session.userId })
         .then(apiRes => {
             //declaring park so i do not have to 'drill' as deep 
@@ -91,7 +106,7 @@ router.get('/mine', (req, res) => {
             // console.log(apiRes)
             //console.log('this is the park index')
             //rendering(showing all the parks from API)
-            res.render('parks/', { park })
+            res.render('parks/MyIndex', { park })
         })
         
         .catch(err=>{

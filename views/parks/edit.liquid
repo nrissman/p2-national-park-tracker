@@ -2,7 +2,7 @@
 // i need to make this only post on users page
 {% block content %}
 <div class="container-mn" style="color: yellow;">
-<form action="/parks/mine" method="POST">
+<form action="/parks/mine" method="PUT">
     <fieldset>
         <legend style="color: yellow;">Add A Park</legend>
         <label class="form-lable">Name:</label>
@@ -54,7 +54,7 @@
             {{fruit.name}}" 
             class="btn btn-success"   
         >
-        <a href="/fruits" class="btn btn-warning">Nevermind</a>
+        <a href="/parks" class="btn btn-warning">Nevermind</a>
         </div>
 </form>
 </div>

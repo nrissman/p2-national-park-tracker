@@ -1,13 +1,13 @@
 {% layout 'layout.liquid' %}
 
 {% block content%}
-<div style="color: yellow">
+<div style="text-align: center; color: yellow;">
     
     <h4>Park Name: {{park.fullName}}</h4>
+    <img src={{park.images[0].url}} style="width:600px;">
     <p>Park City: {{park.addresses[0].city}}</p>
     <p>Park State: {{park.states}}</p>
     <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
-    <img src="{{park.images}}">
     <p>Description: {{park.description}}</p>
     <form action="/parks/create" method="POST">
         <fieldset>
@@ -35,18 +35,21 @@
         </fieldset>
     </form>
     <div class="btn-group">
-
-        <a href="/parks/{{park.id}}/edit" class="btn btn-primary">Edit Park</a>
-        <form action="/parks/{{park._id}}?_method=DELETE" method="POST">
-            <input type="submit" value="Remove Park" class="btn btn-danger">
+        <div>
+        <a href="/parks/{{park.id}}/edit" class="btn btn-success">Edit Park</a>   
+        </div>
+        <div>
+        <form action="/parks/{{park.parkCode}}?_method=DELETE" method="POST">
+            <input type="submit" value="Remove Park" class="btn btn-danger" style="margin-top: 5px;">       
         </form>
+        </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" style="text-align:center;">
         <form action="/comments/{{park.parkCode}}" method="POST">
             <fieldset>
                 <legend>Add comment</legend>
                 <label class="form-label">Comment: </label>
-                <input type="text" class="form-control" name="note" placeholder="Enter comment here"/>
+                <input type="text" style="text-align:center;" class="form-control" name="note" placeholder="Enter comment here"/>
             </fieldset>
             <input type="submit" class="btn btn-success" value="Add comment" />
         </form>
