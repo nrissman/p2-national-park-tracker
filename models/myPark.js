@@ -9,15 +9,10 @@ const myParkSchema = new Schema(
 	{
 		parkCode: String,
 		fullName: String,
-		parkState: String,
-		entranceFees: Number,
-		description: String,
-
-
 		
 		owner: {
 			type: mongoose.Schema.Types.ObjectId, // a single User ._id
-			ref: 'User', // const User = model('User', userSchema) the string of 'User' is how we reference a model
+			ref: 'Event', // const User = model('User', userSchema) the string of 'User' is how we reference a model
 		},
 		 //comments: [commentSchema] // a park can have many comments. Comments are a sub doc of parks
 	},

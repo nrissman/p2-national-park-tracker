@@ -4,16 +4,22 @@
     <div class="card-body">
         <p>{{ comment.note }}</p>
         <div class="d-flex justify-content-between">
-            <small>author: {{ userId }}</small>
+            <small>author: {{ username }}</small>
             <form action="/comments/delete/{{park._id}}/{{comment._id}}?_method=DELETE" method="POST">
-                <input type="submit" value="X"/>
+                <input type="submit" value="X"/> 
+                    <div class="btn-group">
+                        <a href="/parks/{{park}}/edit" class="btn btn-primary">Edit Park</a>
+                        <form action="/parks/{{park._id}}?_method=DELETE" method="POST">
+                            <input type="submit" value="Remove Park" class="btn btn-danger">
+                        </form>
+                    </div>
             </form>
-        
         </div>
     </div>
 </div>
 
 {% endblock %}
+
 <!-- create an edit and a delete button... these can be the same as the edit and delete from fruits-->
 
-<!-- add an if statement so that only the logged in user can access these buttons   -->
+<!-- add and if statement so that only the logged in user can access these buttons   -->

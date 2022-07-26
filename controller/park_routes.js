@@ -5,8 +5,8 @@ const router = express.Router()
 require('dotenv').config()
 const axios = require('axios')
 const api_key = process.env.API_KEY
-const MyPark = require('../models/MyPark')
-const Comment = require('../models/comment')
+const MyPark = require('../models/myPark')
+// const Comment = require('../models/comment')
 
 
 
@@ -26,33 +26,33 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-// // GET route for displaying an update form
-// router.get('/:id/edit', (req, res) => {
-//     const parkId = req.params.id
+// GET route for displaying an update form
+router.get('/:id/edit', (req, res) => {
+    const parkId = req.params.id
 
-//     MyPark.findById(parkId)
-//         .then(MyPark => {
-//             res.render('park/', { park })
-//         })
-//         .catch(err => {
-//             res.json(err)
-//         })
-// })
+    MyPark.findById(parkId)
+        .then(MyPark => {
+            res.render('park/', { park })
+        })
+        .catch(err => {
+            res.json(err)
+        })
+})
 
-// // PUT - Update
-// // localhost:3000/fruits/:id
-// router.put('/:id', (req, res) => {
-//     const parkId = req.params.id
+// PUT - Update
+// localhost:3000/fruits/:id
+router.put('/:id', (req, res) => {
+    const parkId = req.params.id
 
 
-//     MyPark.findByIdAndUpdate(parkId, req.body, { new: true })
-//         .then(MyPark => {
-//             res.redirect(`/parks/mine`)
-//         })
-//         .catch(err => {
-//             res.json(err)
-//         })
-// })
+    MyPark.findByIdAndUpdate(parkId, req.body, { new: true })
+        .then(MyPark => {
+            res.redirect(`/parks/mine`)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+})
 
 
 /////////////////////INDEX ROUTE////////////////////////
@@ -88,7 +88,7 @@ router.get('/mine', (req, res) => {
         .then(apiRes => {
             //declaring park so i do not have to 'drill' as deep 
             const park = apiRes
-            //console.log(apiRes)
+            // console.log(apiRes)
             //console.log('this is the park index')
             //rendering(showing all the parks from API)
             res.render('parks/MyIndex', { park })
@@ -113,25 +113,19 @@ router.get('/new', (req, res) => {
 
 /////////////POST ROUTE////////////////
 //need to change this to only post to user index not guest index, make user index 
-router.post('/create', async (req, res) => {
+router.post('/create', (req, res) => {
     req.body.owner = req.session.userId
-    
-    const park = await MyPark.find({parkCode: req.body.parkCode})
-            if (park[0]){
-                res.redirect('/parks/mine')
-            } else{
-                MyPark.create(req.body)
-                .then(MyPark => {
-                        // res.json(park)
-                        res.redirect('/parks/mine')
-                    })
-                    .catch(err => {
-                        res.json(err)
-                    })
-
-            }
-        
-
+    MyPark.create(req.body)
+        .then(MyPark => {
+            //console.log('/////HELLO IM CONSOLING/////')
+            // console.log(myPark)
+            //console.log('/////HELLO IM CONSOLING/////')
+            // res.json(park)
+            res.redirect('/parks/mine')
+        })
+        .catch(err => {
+            res.json(err)
+        })
 })
 
 
@@ -146,30 +140,26 @@ router.post('/create', async (req, res) => {
 ///////////////GUEST SHOW ROUTE///////////////////////////
 //This shows guest user the park info 
 router.get('/:parkCode', (req, res) => { 
-    //console.log('//////////////////', req.params.parkCode)
     const pc = req.params.parkCode
-    console.log('+++++++++++++', pc)
     //test using park code acad
     //url for testing should be /parks/acad
+    axios.get(`https://developer.nps.gov/api/v1/parks?parkCode=${pc}&api_key=${api_key}`)
+        .then(apiRes => {
+            const park = apiRes.data.data[0]
             //console.log('HELLO NEIL AND TI+MOOOOOOOOOOOOOOO')
             // console.log('this is the response from the api', park)
             //console.log('/////////////////////////////////////////')
-            Comment.find({parkCode: pc })
-            .then(comments => {
-                MyPark.find({parkCode: pc})
-                .then(park => {
-                    park.parkCode = pc
-                    console.log('////////',park)
-                    res.render('parks/show', { park, comments, userId: req.session.userId })
-                })
-                
-            })
+
+            // Comment.find({parkCode: pc })
+            // .then()
             // youre going to pass the comments and park data to the parks/show page for all to see 
-            //need to query comments and filter by parkCode then all parks will show with any associated comments 
-            .catch(err=>{
-                console.error('Error:', err)
-                res.json(err)
-            })
+            res.render('parks/show', { park })
+        })
+
+        .catch(err=>{
+            console.error('Error:', err)
+            res.json(err)
+        })
     
     
 })

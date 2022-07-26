@@ -4,23 +4,26 @@ const express = require('express')
 const router = express.Router()
 // importing Park model to access database
 const MyPark = require('../models/park')
-const Comment = require('../models/comment')
 
 // POST - Creation
-// create route has to say Comment.create 
-//redirect to park show page with parkid 
 // localhost:3000/comments/:parkId <- A single Park can have many comments
 router.post('/:parkId', (req, res) => {
-    const parkCode = req.params.parkId
-    req.body.author = req.session.userId
-    // single park doc there is a field called comments
-    req.body.parkCode = parkCode
-    console.log('///////////////////hitting route//////////////////', req.body )
-    Comment.create(req.body) 
-        .then (comment => {
-            res.redirect(`/parks/${parkCode}`)
+    const parkId = req.params.parkId
+    req.body.author = req.body.userId
+
+    MyPark.findById(parkId)
+        // after we found a park 
+        // take that park and add the comment
+        .then(park => {
+            // single park doc there is a field called comments
+            park.comments.push(req.body)
+
+            // if we change a doc, we have to return and call .save() on the doc.
+            return park.save()
         })
-        
+        .then(park => {
+            res.redirect(`/parks/${park._id}`)
+        })
         .catch(err => {
             res.json(err)
         })

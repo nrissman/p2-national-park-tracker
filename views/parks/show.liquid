@@ -1,34 +1,76 @@
 {% layout 'layout.liquid' %}
 
 {% block content%}
-<div style="text-align: center; color: black;">
+<div style="text-align: center; color: yellow;">
     
-    <h4>Park Name: {{park[0].fullName}}</h4>
-    <img src={{park.images[0].url}} >
-    <!-- <p>Park City: {{park.addresses[0].city}}</p> -->
-    <p>Park State: {{park[0].parkState}}</p>
-    <p>Entrance Fee: {{park[0].entranceFees}}</p>    
-    <p>Description: {{park[0].description}}</p>
-
+    <h4>Park Name: {{park.fullName}}</h4>
+    <img src={{park.images[0].url}} style="width:600px;">
+    <p>Park City: {{park.addresses[0].city}}</p>
+    <p>Park State: {{park.states}}</p>
+    <p>Entrance Fee: {{park.entranceFees[0].cost.}}, {{park.entranceFees[0].description}}</p>    
+    <p>Description: {{park.description}}</p>
+    <form action="/parks/create" method="POST">
+        <fieldset>
+            <input 
+                class="form-control"
+                type="text" 
+                name="fullName" 
+                value="{{park.fullName}}"
+                hidden                    
+            >
+        
+            <input 
+                class="form-control"
+                type="text" 
+                name="parkCode" 
+                value={{park.parkCode}} 
+                hidden
+            >
+    
+            <input 
+                type="submit" 
+                value="Add To My Parks"
+                class="btn btn-success"
+            >
+        </fieldset>
+    </form>
+    <div class="btn-group">
+        <div>
+        <a href="/parks/{{park.id}}/edit" class="btn btn-success">Edit Park</a>   
+        </div>
+        <div>
+        <form action="/parks/{{park.parkCode}}?_method=DELETE" method="POST">
+            <input type="submit" value="Remove Park" class="btn btn-danger" style="margin-top: 5px;">       
+        </form>
+        </div>
+    </div>
     <div class="col-md-6" style="text-align:center;">
         <form action="/comments/{{park.parkCode}}" method="POST">
             <fieldset>
                 <legend>Add comment</legend>
                 <label class="form-label">Comment: </label>
-                <input type="text" style="text-align:center;" class="form-control" name="note" value="input" placeholder="Enter comment here"/>
+                <input type="text" style="text-align:center;" class="form-control" name="note" placeholder="Enter comment here"/>
             </fieldset>
-            <input type="submit" class="btn btn-success" value="Add comment"/>
+            <input type="submit" class="btn btn-success" value="Add comment" />
         </form>
     </div>
-    {% if comments.length > 0 %}
+    {% if park.comments.length > 0 %}
     <div class="container-sm justify-content-center">
         <div class="col-md-8 col-lg-6" >
-            {% for comment in comments %}
-            {% render './comment.liquid' comment: comment, userId: userId, username: username%}
+            {% for comment in park.comments %}
+            {% render '../comment.liquid' comment: comment, userId: userId, park: park, username: username%}
             {% endfor %}
         </div>
     </div>
     {% endif %}
 
 </div>
+
 {% endblock %}
+
+
+<!-- //add a button "add to my parks" that will add this park you YOUR parks thrn bring you to userShow page (my parks) -->
+
+<!-- //park code  -->
+<!-- full name  -->
+<!-- statecode -->
