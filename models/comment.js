@@ -9,7 +9,7 @@ const commentSchema = new Schema({
         required: true
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId, // single User
+        type: Schema.Types.ObjectId, // single User
         ref: 'User' // string value from the model creation
     }
 }, {

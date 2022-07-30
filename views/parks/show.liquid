@@ -34,16 +34,6 @@
             >
         </fieldset>
     </form>
-    <div class="btn-group">
-        <div>
-        <a href="/parks/{{park.id}}/edit" class="btn btn-success">Edit Park</a>   
-        </div>
-        <div>
-        <form action="/parks/{{park.parkCode}}?_method=DELETE" method="POST">
-            <input type="submit" value="Remove Park" class="btn btn-danger" style="margin-top: 5px;">       
-        </form>
-        </div>
-    </div>
     <div class="col-md-6" style="text-align:center;">
         <form action="/comments/{{park.parkCode}}" method="POST">
             <fieldset>
