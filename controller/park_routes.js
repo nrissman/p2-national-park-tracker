@@ -6,6 +6,7 @@ require('dotenv').config()
 const axios = require('axios')
 const api_key = process.env.API_KEY
 const MyPark = require('../models/myPark')
+const Comment = require('../models/comment')
 // const Comment = require('../models/comment')
 
 
@@ -137,7 +138,7 @@ router.post('/create', (req, res) => {
 
 
 
-///////////////GUEST SHOW ROUTE///////////////////////////
+///////////////SHOW ROUTE///////////////////////////
 //This shows guest user the park info 
 router.get('/:parkCode', (req, res) => { 
     const pc = req.params.parkCode
@@ -150,10 +151,18 @@ router.get('/:parkCode', (req, res) => {
             // console.log('this is the response from the api', park)
             //console.log('/////////////////////////////////////////')
 
-            // Comment.find({parkCode: pc })
-            // .then()
+            Comment.find({parkCode: pc })
+                .populate('author')
+                .then(comments => {
+                    console.log('/////////', comments)
+                    res.render('parks/show', { park, comments })                   
+                })
+                .catch(err=>{
+                    console.error('Error:', err)
+                    res.json(err)
+                })
             // youre going to pass the comments and park data to the parks/show page for all to see 
-            res.render('parks/show', { park })
+            
         })
 
         .catch(err=>{

@@ -44,11 +44,11 @@
             <input type="submit" class="btn btn-success" value="Add comment" />
         </form>
     </div>
-    {% if park.comments.length > 0 %}
-    <div class="container-sm justify-content-center">
+    {% if comments.length > 0 %}
+    <div class="container-sm justify-content-center" style="color: black;">
         <div class="col-md-8 col-lg-6" >
-            {% for comment in park.comments %}
-            {% render '../comment.liquid' comment: comment, userId: userId, park: park, username: username%}
+            {% for comment in comments %}
+            {% render '../comment.liquid' comment: comment, userId: userId, parkCode: park.parkCode%}
             {% endfor %}
         </div>
     </div>

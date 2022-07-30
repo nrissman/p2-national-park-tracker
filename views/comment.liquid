@@ -4,16 +4,13 @@
     <div class="card-body">
         <p>{{ comment.note }}</p>
         <div class="d-flex justify-content-between">
-            <small>author: {{ username }}</small>
-            <form action="/comments/delete/{{park._id}}/{{comment._id}}?_method=DELETE" method="POST">
-                <input type="submit" value="X"/> 
-                    <div class="btn-group">
-                        <a href="/parks/{{park}}/edit" class="btn btn-primary">Edit Park</a>
-                        <form action="/parks/{{park._id}}?_method=DELETE" method="POST">
-                            <input type="submit" value="Remove Park" class="btn btn-danger">
-                        </form>
-                    </div>
-            </form>
+            <small>author: {{ comment.author.username }}</small>          
+            <div class="btn-group">
+                <a href="/comments/{{parkCode}}/edit" class="btn btn-primary">Edit Comment</a>
+                <form action="/comments/delete/{{parkCode}}/{{comment.id}}?_method=DELETE" method="POST">
+                    <input type="submit" value="Remove Comment" class="btn btn-danger">
+                </form>
+            </div>            
         </div>
     </div>
 </div>

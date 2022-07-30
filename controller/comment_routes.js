@@ -18,7 +18,7 @@ router.post('/:parkCode', (req, res) => {
         .then(comment => {
             console.log('/////HELLO IM CONSOLING/////')
             console.log(comment)
-            res.redirect('/parks/mine')
+            res.redirect(`/parks/${parkCode}`)
         })
         .catch(err => {
             res.json(err)
@@ -28,26 +28,32 @@ router.post('/:parkCode', (req, res) => {
 })
 
 // DELETE - delete yeeting
-router.delete('/delete/:parkId/:commId', (req, res) => {
-    const parkId = req.params.parkId
+router.delete('/delete/:parkCode/:commId', (req, res) => {
+    const parkCode = req.params.parkCode
     const commId = req.params.commId
     
     //find a park by its ID... then find this comment by its ID... remove the comment
-    MyPark.findById(parkId)
+    Comment.findById(commId)
     //because one park can have many comments we need to use commId
-    .then(park => {
-        const comment = park.comments.id(commId)
-        //remove comment with this 
-        comment.remove()
-        //because we changed the comments by one we must save on the park aka the document  ALWAYS SAVE AT DOCUMENT LEVEL
-        return park.save()
-    })
-    .then(park => {
-        res.redirect(`/parks/`)
-    })
-    .catch(err => {
-        res.send(err)
-    })
+        .then(comment => {
+            console.log("THE COMMENT TO DELETE \n", comment)
+            if (comment.author == req.session.userId) {
+                Comment.findByIdAndDelete(comment.id)
+                    .then(comment => {
+                        res.redirect(`/parks/${parkCode}`)
+                    })
+                    .catch(err => {
+                        res.send(err)
+                    })
+            } else {
+                res.redirect(`/parks/${parkCode}`)
+            }
+            //remove comment with this 
+            //because we changed the comments by one we must save on the park aka the document  ALWAYS SAVE AT DOCUMENT LEVEL
+        })
+        .catch(err => {
+            res.send(err)
+        })
     
 })
 module.exports = router
