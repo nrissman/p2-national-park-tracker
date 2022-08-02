@@ -2,56 +2,20 @@
 // i need to make this only post on users page
 {% block content %}
 <div class="container-mn" style="color: yellow;">
-<form action="/parks/mine" method="PUT">
+<form action="/parks/{{park.parkCode}}" method="PATCH">
     <fieldset>
-        <legend style="color: yellow;">Add A Park</legend>
-        <label class="form-lable">Name:</label>
+        <legend style="color: yellow;">Edit Comment</legend>
+        <label class="form-lable">Comment:</label>
             <input 
                 class="form-control"
                 type="text" 
-                fullName="fullName" 
-                placeholder="Enter Name"
-            >
-        <label class="form-lable">Enter City:</label>
-            <input 
-                class="form-control"
-                type="text" 
-                name="city" 
-                placeholder="Enter City"
-            >
-        <label class="form-lable">Statecode:</label>
-            <input 
-                class="form-control"
-                type="text" 
-                name="stateCode" 
-                placeholder="Enter State Code"
-            >
-        <label class="form-lable">Entrance Fees:</label>
-            <input 
-                class="form-control"
-                type="number" 
-                name="entranceFees" 
-                placeholder="Entrance Fee"
-            >
-        <label class="form-lable">Description:</label> 
-            <input
-                class="form-control"
-                type="text" 
-                name="description" 
-                placeholder="Enter Description"
-            >
-
-            <input 
-                type="submit" 
-                value="Create New Park"
-                class="btn btn-success"
+                name="comment"
+                placeholder="Enter Comment"
             >
     </fieldset>
     <div class="btn-group">
         <input 
             type="submit" 
-            value="Edit 
-            {{fruit.name}}" 
             class="btn btn-success"   
         >
         <a href="/parks" class="btn btn-warning">Nevermind</a>

@@ -27,33 +27,7 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-// GET route for displaying an update form
-router.get('/:id/edit', (req, res) => {
-    const parkId = req.params.id
 
-    MyPark.findById(parkId)
-        .then(MyPark => {
-            res.render('park/', { park })
-        })
-        .catch(err => {
-            res.json(err)
-        })
-})
-
-// PUT - Update
-// localhost:3000/fruits/:id
-router.put('/:id', (req, res) => {
-    const parkId = req.params.id
-
-
-    MyPark.findByIdAndUpdate(parkId, req.body, { new: true })
-        .then(MyPark => {
-            res.redirect(`/parks/mine`)
-        })
-        .catch(err => {
-            res.json(err)
-        })
-})
 
 
 /////////////////////INDEX ROUTE////////////////////////
