@@ -42,11 +42,11 @@ router.post('/:parkCode', (req, res) => {
 // GET route for displaying an update form
 router.get('/edit/:parkCode/:commId', (req, res) => {
     const commId = req.params.commId
-
+    const pc = req.params.parkCode
     Comment.findById(commId)
         .then(comment => {
             console.log('FOUND COMMENT', comment)
-            res.render('parks/edit', { comment })
+            res.render('parks/edit', {comment, pc} )
         })
         .catch(err => {
             res.json(err)
@@ -55,20 +55,35 @@ router.get('/edit/:parkCode/:commId', (req, res) => {
 
 
 
-router.patch('/edit/:parkCode/:commId', ( req, res ) => {
-    const parkCode = req.params.parkCode
-    const commId = req.params.commId
-    const note = req.body.note
+    //4000/comments/edit/:commId
+    // comments/edit/{{comment.id}}
 
-    //find the comment by its ID 
+router.patch('/edit/:commId', ( req, res ) => {
+    const commId = req.params.commId
+   //const note = req.body.note
+   console.log("this is the comment body", req.body)
+
     Comment.findById(commId)
-    
-    //rediret user to edit comment page (edit.liquid)
-        .then(comment => {
-            // THEN --> check to see if autor is the one trying to edit comment ref ln.73
-            console.log('THE COMMENT TO EDIT\n', comment)
-            res.redirect('/:parkCode')
-        })
+
+    .then(comment => {
+        console.log("THE COMMENT TO UPDATE \n", comment)
+        //here were saying if the comments author equals the person logged in then go ahead and do the next function 
+        //we used the session to identify who is logged in 
+        if (comment.author == req.session.userId) {
+            comment.note = req.body.note
+            comment.save()
+            res.redirect(`/parks/${comment.parkCode}`)
+        } else {
+            // Here were saying it the person trying to update the comment is not the author throw and error and redirect the user back to the parks show page without updating the comment becasue only the author should be able to update thier own comments.
+            console.log("else hit")
+            res.redirect(`/parks/${comment.parkCode}`)
+        }
+        //remove comment with this 
+        //because we changed the comments by one we must save on the park aka the document  ALWAYS SAVE AT DOCUMENT LEVEL
+    })
+    .catch(err => {
+        res.send(err)
+    })
 })
 
 
@@ -84,7 +99,7 @@ router.delete('/delete/:parkCode/:commId', (req, res) => {
     //find a park by its ID... then find this comment by its ID... remove the comment
     Comment.findById(commId)
     //because one park can have many comments we need to use commId
-    //here were saying once you find the comment by id THEN do theis next thing with the comment... in this case were console logging it on like 52 to make sure were getting the right info back by calling it... were then deleting it the found comment with findByIdAndDelete... 
+    //here were saying once you find the comment by id THEN do theis next thing with the comment... in this case were console logging it on like 52 to make sure were getting the right info back by calling it... were then deleting the found comment with findByIdAndDelete... 
     
         .then(comment => {
             // console.log("THE COMMENT TO DELETE \n", comment)
