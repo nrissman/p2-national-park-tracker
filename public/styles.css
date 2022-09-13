@@ -24,3 +24,22 @@ h4{
     text-align: center;
     font-style: italic;
 }
+
+#comment{
+    margin-left: 25%;
+
+}
+#comment-container{
+    margin-left: 25%;
+    
+
+}
+
+.card-body{
+    background-color: rgb(5, 108, 205, .5);
+
+}
+
+img{
+    border-radius: 20px;
+}
