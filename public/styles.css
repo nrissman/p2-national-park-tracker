@@ -43,3 +43,7 @@ h4{
 img{
     border-radius: 20px;
 }
+
+#comment-buttons{
+    size: 30px;
+}
