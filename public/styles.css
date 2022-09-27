@@ -1,7 +1,9 @@
 body{
-    /* background-image: url(https://downeast.com/wp-content/uploads/2020/06/tom-henell-ckggMjk-gqc-unsplash.jpg); */
-    background-size:contain;
-    background-color:rgb(29, 93, 63);
+    background-image: url(https://downeast.com/wp-content/uploads/2020/06/tom-henell-ckggMjk-gqc-unsplash.jpg);
+    background-size:cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* background-color:rgb(29, 93, 63); */
 
 }
 
@@ -46,4 +48,18 @@ img{
 
 #comment-buttons{
     size: 30px;
+}
+
+.cards {
+    justify-content: center;
+}
+
+.row {
+    justify-content: center;
+    justify-items: center;
+}
+
+.show {
+    text-align: center;
+    color: yellow
 }
